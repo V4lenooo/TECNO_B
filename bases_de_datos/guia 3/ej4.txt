@@ -1,0 +1,47 @@
+Lenguaje de Consulta de Datos (DQL): Los estudiantes practicarán las consultas básicas para recuperar información de las tablas, por ejemplo:
+Obtener todos los pacientes.
+Obtener todos los médicos y sus especialidades.
+Listar las citas médicas programadas.
+Obtener los tratamientos de un paciente específico por id y por nombre.
+
+sea id 1 ,nombre 'María López'
+
+select * from patients;
++----+---------------+------------+--------+-----------+----------------------+
+| id | name          | birthdate  | gender | phone     | email                |
++----+---------------+------------+--------+-----------+----------------------+
+|  1 | Juan Pérez    | 1990-05-10 | Male   | 123456789 | juan.perez@mail.com  |
+|  2 | María López   | 1985-08-25 | Female | 987654321 | maria.lopez@mail.com |
++----+---------------+------------+--------+-----------+----------------------+
+
+select name, specialty from doctors;
++-------------------+---------------+
+| name              | specialty     |
++-------------------+---------------+
+| Dr. Carlos Gómez  | Cardiología   |
+| Dra. Ana Torres   | Dermatología  |
++-------------------+---------------+
+
+select * from appointments where status = 'Scheduled';
++----+------------+-----------+---------------------+-----------+
+| id | patient_id | doctor_id | appointment_date    | status    |
++----+------------+-----------+---------------------+-----------+
+|  1 |          1 |         1 | 2025-03-01 10:00:00 | Scheduled |
+|  2 |          2 |         2 | 2025-03-02 14:30:00 | Scheduled |
++----+------------+-----------+---------------------+-----------+
+
+select * from treatments where patient_id = 1;
++----+------------+-----------+---------------+------------------------------+---------------------+
+| id | patient_id | doctor_id | diagnosis     | prescription                 | treatment_date      |
++----+------------+-----------+---------------+------------------------------+---------------------+
+|  1 |          1 |         1 | Hipertensión  | Losartán 50mg cada 12 horas  | 2026-04-08 13:13:26 |
++----+------------+-----------+---------------+------------------------------+---------------------+
+
+select treatments.diagnosis, treatments.prescription, patients.name, patients.id  
+from treatments join patients on treatments.patient_id = patients.id where patients.id = 1;
+
++---------------+------------------------------+-------------+----+
+| diagnosis     | prescription                 | name        | id |
++---------------+------------------------------+-------------+----+
+| Hipertensión  | Losartán 50mg cada 12 horas  | Juan Pérez  |  1 |
++---------------+------------------------------+-------------+----+
