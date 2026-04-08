@@ -1,0 +1,65 @@
+1.  Obtener todos los pacientes.
+
+MariaDB [patientsdb]> select * from patients;
++----+------------+-----------+-----+-----------+----------------------+
+| id | first_name | last_name | age | phone     | email                |
++----+------------+-----------+-----+-----------+----------------------+
+|  1 | John       | Doe       |  30 | 123456789 | john.doe@email.com   |
+|  2 | Jane       | Smith     |  28 | 987654321 | jane.smith@email.com |
+|  3 | Mike       | Brown     |  40 | 555123456 | NULL                 |
++----+------------+-----------+-----+-----------+----------------------+
+
+2.  Obtener solo nombres y edades.
+
+MariaDB [patientsdb]> select first_name, last_name ,age from patients;
++------------+-----------+-----+
+| first_name | last_name | age |
++------------+-----------+-----+
+| John       | Doe       |  30 |
+| Jane       | Smith     |  28 |
+| Mike       | Brown     |  40 |
++------------+-----------+-----+
+
+3.  Filtrar pacientes mayores de 30 años.
+
+MariaDB [patientsdb]> select first_name, last_name ,age from patients where age > 30; 
++------------+-----------+-----+
+| first_name | last_name | age |
++------------+-----------+-----+
+| Mike       | Brown     |  40 |
++------------+-----------+-----+
+
+4.  Buscar un paciente por teléfono.
+
+MariaDB [patientsdb]> SELECT first_name, last_name FROM Patients WHERE phone = 123456789;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| John       | Doe       |
++------------+-----------+
+
+Actualiza la edad de "John Doe" a 31 años.
+
+update patients set age = age + 1 where id = 1;
+
+MariaDB [patientsdb]> select * from patients;                                             
++----+------------+-----------+-----+-----------+----------------------+
+| id | first_name | last_name | age | phone     | email                |
++----+------------+-----------+-----+-----------+----------------------+
+|  1 | John       | Doe       |  31 | 123456789 | john.doe@email.com   |
+|  2 | Jane       | Smith     |  28 | 987654321 | jane.smith@email.com |
+|  3 | Mike       | Brown     |  40 | 555123456 | NULL                 |
++----+------------+-----------+-----+-----------+----------------------+
+
+Elimina el paciente "Mike Brown" de la tabla. 
+
+delete from patients where id = 3;
+
+MariaDB [patientsdb]> select * from patients;            
++----+------------+-----------+-----+-----------+----------------------+
+| id | first_name | last_name | age | phone     | email                |
++----+------------+-----------+-----+-----------+----------------------+
+|  1 | John       | Doe       |  31 | 123456789 | john.doe@email.com   |
+|  2 | Jane       | Smith     |  28 | 987654321 | jane.smith@email.com |
++----+------------+-----------+-----+-----------+----------------------+
+
