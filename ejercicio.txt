@@ -1,0 +1,32 @@
+Sentencias  SQL  que  debe  crear,  usar  en  las  mismas  SUM, 
+AVG, COUNT, expresiones lógicas, LEFT JOIN y INNER JOIN, 
+GROUP BY y HAVING COUNT: 
+
+a. Obtener el número total de productos en stock. 
+
+SELECT SUM(stock) AS stock_total FROM products;
++-------------+
+| stock_total |
++-------------+
+|          95 |
++-------------+
+
+b. Listar la cantidad total de órdenes realizadas por 
+cada cliente. 
+
+SELECT c.id, CONCAT(c.first_name,' ', c.last_name) AS name, COUNT(o.id) AS total_orders FROM customers c LEFT JOIN orders o 
+ON c.id = o.customer_id GROUP BY c.id, c.first_name ORDER BY c.id;     
++----+------------------+--------------+
+| id | name             | total_orders |
++----+------------------+--------------+
+|  1 | Ana Gómez        |            2 |
+|  2 | Luis Pérez       |            2 |
+|  3 | Carla Rodríguez  |            1 |
+|  4 | Arena Calienes   |            0 |
++----+------------------+--------------+
+
+c. Mostrar el monto promedio de las órdenes realizadas. 
+d. Listar los productos cuyo stock sea menor o igual a 10 unidades. 
+e. Obtener el total vendido por producto. 
+f. Mostrar los días en los que se realizaron más de 2 
+órdenes.
